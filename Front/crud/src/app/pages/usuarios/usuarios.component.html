@@ -1,0 +1,71 @@
+<div *ngIf="bandera ; else crear" class="container">
+    <div>
+        <a class="btn btn-primary mt-4 mb-4" (click)="crearNota()">Crear nota</a>
+    </div>
+    <div class="row">
+        <div class="col-md-4" *ngFor="let nota of notas">
+            <div class="card text-center mb-3">
+                <div class="card-header">
+                    Nota {{ nota.id }}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ nota.titulo }} </h5>
+                    <p class="card-text">{{ nota.contenido }}</p>
+                    <a  class="btn btn-primary me-2" (click)="activarEdicion(nota)">Editar</a>
+                    <a  class="btn btn-danger" (click)="eliminarNota(nota.id)">Eliminar</a>
+                </div>
+                <div class="card-footer text-body-secondary">
+                    {{ nota.fecha | date:'dd/MM/yyyy HH:mm' }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="estadoEdicion">
+    <div class="container mt-4">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6">
+                <form [formGroup]="editarNotaForm" (submit)="guardarCambios()">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="titulo" formControlName="titulo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="contenido" class="form-label">Contenido</label>
+                        <textarea class="form-control" id="contenido" formControlName="contenido"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2" >Actualizar Nota</button>
+                    <button type="button" class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #crear>
+    <div class="container mt-4">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6">
+                <form [formGroup]="crearNotaForm" (submit)="crearNota()">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="titulo" formControlName="titulo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="contenido" class="form-label">Contenido</label>
+                        <textarea class="form-control" id="contenido" formControlName="contenido"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear nota</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+
+
+
+  
+  
